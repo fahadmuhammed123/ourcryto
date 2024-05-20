@@ -1,0 +1,80 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+
+<head> 
+    <link rel="shortcut icon" href="image/cleano2.png" type="image/x-icon">
+    <title>Qr Code</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+
+        .header {
+            text-align: center;
+        }
+
+        .box {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: calc(100% - 22px);
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .qrcode {
+            margin-top: 20px;
+        }
+    </style>
+
+    <!-- External QR code library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script> 
+</head> 
+
+<body> 
+    <div class="header"> 
+        <div class="box"> 
+            <h1> 
+                Scan My Qr-Code 
+            </h1> 
+            <hr /> 
+            <div class="sqrcode"></div> 
+            <div class="qrcode"></div> 
+            <input type="text" placeholder="Enter your Cleano Id" onchange="generateQr()" /> 
+        </div> 
+    </div> 
+
+    <script>
+        // Create a new QRCode instance 
+        let qrcode = new QRCode(document.querySelector(".qrcode"));
+
+        // Initial QR code generation with a default message 
+        qrcode.makeCode("https://www.google.com/search?q=ad+web+comic+agency");
+
+        // Function to generate QR code based on user input 
+        function generateQr() {
+            const input = document.querySelector("input").value.trim();
+            if (input === "") {
+                alert("Input Field Cannot be blank!");
+            } else {
+                // Generate Google search URL
+                const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(input)}`;
+                qrcode.makeCode(searchUrl);
+            }
+        }
+    </script> 
+</body> 
+
+</html>
